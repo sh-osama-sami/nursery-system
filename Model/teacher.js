@@ -11,7 +11,7 @@ const schema = new mongoose.Schema({
     image: String,
     role:{
         type: String,
-        enum:["admin","supervisor"]
+        enum:["admin","supervisor","teacher"]
     }
 });
 //2-mapping

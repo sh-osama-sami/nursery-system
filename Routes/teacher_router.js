@@ -12,6 +12,7 @@ router.route("/teachers")
 
 router.route("/teacher/:id")
     .get(isAdmin,controller.getTeacherById)
+    //check if the id of the teacher is the same id as the deleted object 
     .delete(isAdminOrTeacher,controller.deleteTeacher);
 
 router.get("/teachers/supervisor",isAdmin ,controller.getAllSupervisors);
