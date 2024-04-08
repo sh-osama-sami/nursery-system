@@ -4,7 +4,7 @@ module.exports = (req, res, next) => {
   try {
     const token = req.get("authentication").split(" ")[1];
     //verify with the encryption key
-    let decodedToken = jwt.verify(token, "nurseryteacher");
+    let decodedToken = jwt.verify(token, process.env.secretKey);
     req.token = decodedToken;
     next(); // where will this go
   } catch (error) {

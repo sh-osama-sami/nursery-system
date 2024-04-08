@@ -6,6 +6,8 @@ const teacherRouter = require("./Routes/teacher_router");
 const classRouter = require("./Routes/class_router");
 const loginRouter= require("./Routes/auth_router");
 const authmw = require("./Middlewares/auth_middleware")
+require('dotenv').config()
+
 const mongoose = require("mongoose");
 
 const app = express();
@@ -14,7 +16,8 @@ const app = express();
 
 mongoose.connect("mongodb://127.0.0.1:27017/cloudDB").then(()=>{
     console.log("DB connected")
-    app.listen(8080, () => {
+    // for deployment on other hosts
+    app.listen(process.env.PORT || 8080, () => {
       console.log("Server is running on http://localhost:8080");
     });
 }).catch((error)=>{
@@ -43,3 +46,8 @@ app.use((error, request, response) => {
   console.log("Entered Error Layer 2");
   response.status(500).json({ Error: "Error " + error });
 });
+
+
+// there's a package called dotenv that is used to keep the environment variables
+// such as secret key so that i don't have to write it explicitly inside the code
+// and each developer sets the secret key on  their host 

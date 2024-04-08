@@ -1,6 +1,6 @@
 const teacherModel = require("../Model/teacher.js");
 const jwt = require("jsonwebtoken");
-
+require('dotenv').config();
 exports.login = (req, res, next) => {
   teacherModel
     .findOne({ email: req.body.email, password: req.body.password })
@@ -9,7 +9,7 @@ exports.login = (req, res, next) => {
 
       let token = jwt.sign(
         { _id: data._id, role: data.role },
-        "nurseryteacher",
+            process.env.secretKey,
         {
           expiresIn: "1h",
         }
