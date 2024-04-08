@@ -3,7 +3,7 @@ const router = express.Router();
 const controller = require('../Controller/class_controller');
 const { isSupervisorOrAdmin , isAdmin} = require("../Middlewares/auth_middleware")
 router.route('/classes')
-    .get(isSupervisorOrAdmin,controller.getAllClasses)
+    .get(isAdmin,controller.getAllClasses)
     .post(isAdmin,controller.createClass)
     .put(isSupervisorOrAdmin,controller.updateClass)
     .delete(isAdmin,controller.deleteAllClass)

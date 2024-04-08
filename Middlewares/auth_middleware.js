@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 module.exports = (req, res, next) => {
   try {
-    const token = req.get("authentication").split(" ")[1];
+    const token = req.get("authorization").split(" ")[1];
     //verify with the encryption key
     let decodedToken = jwt.verify(token, process.env.secretKey);
     req.token = decodedToken;
@@ -41,7 +41,7 @@ module.exports.isAdminOrTeacher = (req, res, next) => {
   }
 };
 
-modules.exports.isSupervisor = (req, res, next) => {
+module.exports.isSupervisor = (req, res, next) => {
   if (req.token.role == "supervisor") next();
   else {
     let error = new Error("you are not a supervisor");
